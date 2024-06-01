@@ -1,0 +1,32 @@
+Project Sketch
+
+Title: Personalized Fitness Assistant
+Description: This project aims to develop a simple mobile application that provides basic personalized workout plans based on user input. Users will enter their fitness goals, current fitness level, and available equipment. The app will generate a straightforward workout plan and track the user's progress.
+Use Case: Jane Doe, a busy professional, wants to stay fit but has limited time. She downloads the Personalized Fitness Assistant app, enters her goal (e.g., lose weight), current fitness level (beginner), and available equipment (dumbbells). The app provides her with a weekly workout plan with short, effective exercises. Jane logs her workouts in the app, which tracks her progress and provides basic feedback.
+
+Implementation Challenges:
+•	Developing a basic workout generation algorithm.
+•	Creating a simple, user-friendly interface.
+
+Implementation Feasibility:
+•	The app could be developed using Visual Studio Code and be managed through GitHub.
+•	Basic workout routines can be sourced from public fitness https://www.muscleandstrength.com/exercises 
+
+User and Stakeholders:
+•	Primary users: Fitness enthusiasts, beginners.
+•	Secondary stakeholders: Fitness trainers.
+
+Task and Problem:
+•	The app addresses the problem of creating simple workout plans and tracking progress.
+
+Primary Interaction:
+•	Users will input their fitness information, receive a workout plan, and then log their workouts.
+
+Data and Processing:
+•	Input: User's fitness goals, user’s fitness level, user’s equipment, user’s day per week, and user’s time commitment for a workout.
+•	Processing: Generating a basic workout plan.
+•	Output: Simple workout routines and progress tracking.
+
+Results Presentation:
+•	Workout plans in a weekly format.
+•	Progress tracked through basic charts or logs.
