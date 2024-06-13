@@ -1,5 +1,4 @@
 import random
-
 # A static database of exercises
 exercise_db = {
     'beginner': ['Jumping Jacks', 'Knee Push-ups', 'Squats'],
