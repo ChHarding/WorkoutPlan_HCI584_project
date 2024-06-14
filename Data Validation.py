@@ -1,6 +1,7 @@
 def validate_user_input(user_profile):
     # validating each field in the user_profile dictionary
     # return True if valid, else False
+    
     valid_goals = ['lose weight', 'gain muscle', 'maintain fitness']
     valid_levels = ['beginner', 'intermediate', 'advanced']
 
