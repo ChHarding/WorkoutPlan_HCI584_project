@@ -44,4 +44,3 @@ print("logs:", workout_logs)
 
 # simulate user tracking progress
 track_progress(workout_logs)
-
