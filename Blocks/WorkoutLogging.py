@@ -13,3 +13,10 @@ if __name__ == '__main__':
     log_workout(workout_logs, date(2024, 6, 3), ['Jumping Jacks', 'Knee Push-ups']) #user input
     log_workout(workout_logs, date(2024, 6, 5), ['Squats', 'Knee Push-ups']) #user input
     print(workout_logs)
+
+# Simulate user logging workouts
+def get_workouts_for_day(workout_plan, day):
+    '''Return the workout for the specific day from the workout plan.'''
+    if day < 1 or day > len(workout_plan):
+        return "Invalid day, please provide a day within the workout plan duration."
+    return workout_plan[day - 1]

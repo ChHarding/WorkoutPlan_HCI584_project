@@ -1,7 +1,7 @@
 from Blocks.DataValidation import validate_user_input
 from Blocks.WorkoutGeneration import generate_workout_plan
 
-# CH: I find it weird that updating the profile also generates a new plan 
+# I find it weird that updating the profile also generates a new plan 
 # so I'm now calling generate_workout_plan separately after the profile is updated/validated
 def update_user_profile(user_profile, updates):
     user_profile.update(updates)

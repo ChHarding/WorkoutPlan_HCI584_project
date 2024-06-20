@@ -35,8 +35,8 @@ else:
 # b/c one we have a GUI, the choice of available workouts to choose to log will be restricted
 # to those listed in the plan for a given day. You could do this now by implementing a
 # get_workouts_for_day() function in the WorkoutLogging module
-#workouts = get_workouts_for_day(1)
-#log_workout(workout_logs, date(2024, 6, 3), workouts)
+# workouts = get_workouts_for_day(1)
+# log_workout(workout_logs, date(2024, 6, 3), workouts)
 
 log_workout(workout_logs, date(2024, 6, 3), ['Jumping Jacks', 'Knee Push-ups']) #user input
 log_workout(workout_logs, date(2024, 6, 5), ['Squats', 'Knee Push-ups']) #user input
