@@ -1,6 +1,6 @@
 # to be able to import these they cannot have spaces!
 from Blocks.ProfileUpdate import update_user_profile
-from Blocks.WorkoutLogging import log_workout
+from Blocks.WorkoutLogging import log_workout, get_workouts_for_day
 from Blocks.ProgressTracking import track_progress
 from Blocks.WorkoutGeneration import generate_workout_plan
 from datetime import date
@@ -31,17 +31,15 @@ else:
     exit()
 
 # simulate user logging workouts
-# we don't need to check that the list of workouts is valid as per the workout plan
-# b/c one we have a GUI, the choice of available workouts to choose to log will be restricted
-# to those listed in the plan for a given day. You could do this now by implementing a
-# get_workouts_for_day() function in the WorkoutLogging module
-#workouts = get_workouts_for_day(1)
-#log_workout(workout_logs, date(2024, 6, 3), workouts)
+# getting workouts for the day using get_workouts_for_day
+for i in range(1, user_profile['days_per_week'] + 1):
+    workouts = get_workouts_for_day(workout_plan, i)
+    if isinstance(workouts, str):
+        print(workouts)
+        exit()
+    log_workout(workout_logs, date(2024, 6, 3 + i), workouts)
 
-log_workout(workout_logs, date(2024, 6, 3), ['Jumping Jacks', 'Knee Push-ups']) #user input
-log_workout(workout_logs, date(2024, 6, 5), ['Squats', 'Knee Push-ups']) #user input
 print("logs:", workout_logs)
 
 # simulate user tracking progress
 track_progress(workout_logs)
-
