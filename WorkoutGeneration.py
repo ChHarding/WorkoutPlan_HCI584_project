@@ -32,5 +32,5 @@ if __name__ == '__main__':
         'days_per_week': 3,
         'time_commitment': 30
     }
-    workout_plan = generate_workout_plan(user_profile) # CH this was a string!
+    workout_plan = generate_workout_plan(user_profile) 
     print(workout_plan)
