@@ -13,7 +13,7 @@ def track_progress(workout_logs):
 # Use this for testing but also to protect it against running this code being run when imported
 if __name__ == '__main__':
     from datetime import date 
-    from Blocks.WorkoutLogging import log_workout
+    from WorkoutLogging import log_workout
     workout_logs = []
     # using an actual date object instead of just an int
     log_workout(workout_logs, date(2024, 6, 3), ['Jumping Jacks', 'Knee Push-ups']) #user input

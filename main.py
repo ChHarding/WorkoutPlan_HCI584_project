@@ -1,8 +1,8 @@
 # to be able to import these they cannot have spaces!
-from Blocks.ProfileUpdate import update_user_profile
-from Blocks.WorkoutLogging import log_workout, get_workouts_for_day
-from Blocks.ProgressTracking import track_progress
-from Blocks.WorkoutGeneration import generate_workout_plan
+from ProfileUpdate import update_user_profile
+from WorkoutLogging import log_workout, get_workouts_for_day
+from ProgressTracking import track_progress
+from WorkoutGeneration import generate_workout_plan
 from datetime import date
 from sys import exit 
 
