@@ -3,7 +3,7 @@ import random
 import csv
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.figure import Figure  # for plotting
+from matplotlib.figure import Figure
 from datetime import date
 import tkinter.ttk as ttk
 
@@ -166,6 +166,9 @@ class WorkoutTrackerApp(tk.Tk):
         # scroll down to the end of the text
         self.workout_plan_text.see(tk.END)
 
+        # Populate the exercise codes listbox in the logging tab
+        self.populate_exercise_codes_listbox()
+
     def create_workout_logging_tab(self, workout_logging_tab):
         tk.Label(workout_logging_tab, text="Date (YYYY-MM-DD):").grid(row=0, column=0, sticky="w")
         self.entry_date = tk.Entry(workout_logging_tab)
@@ -176,9 +179,6 @@ class WorkoutTrackerApp(tk.Tk):
         # Create a listbox for multiple selection
         self.exercise_codes_listbox = tk.Listbox(workout_logging_tab, selectmode="multiple", height=10)
         self.exercise_codes_listbox.grid(row=1, column=1, padx=10, pady=10)
-
-        # Add the exercise codes to the listbox
-        self.populate_exercise_codes_listbox()
 
         # Create a button to confirm selections
         self.select_exercises_button = tk.Button(workout_logging_tab, text="Select", command=self.confirm_exercises_selection)
@@ -273,3 +273,4 @@ class WorkoutTrackerApp(tk.Tk):
 if __name__ == "__main__":
     app = WorkoutTrackerApp()
     app.mainloop()
+
