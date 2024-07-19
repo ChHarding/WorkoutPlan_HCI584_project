@@ -134,17 +134,11 @@ class WorkoutTrackerApp(tk.Tk):
     def create_exercise_generation_tab(self, exercise_generation_tab):
         # Create a button to generate a workout plan
         self.generate_workout_button = tk.Button(exercise_generation_tab, text="Generate Workout Plan", command=self.generate_workout_plan)
-        self.generate_workout_button.pack(padx=10)
+        self.generate_workout_button.pack(padx=10, pady=10)
 
-        # create scrollable text box to display the workout plan
-        self.workout_plan_text = tk.Text(exercise_generation_tab, height=15, width=50)
-        self.workout_plan_text.pack(padx=10, pady=10, fill='both', expand=True)
-
-        # create vertical scrollbar for the text box
-        scrollbar = tk.Scrollbar(self.workout_plan_text, orient="vertical", command=self.workout_plan_text.yview)
-        scrollbar.pack(side="right", fill="y")
-        # configure the text box to use the scrollbar
-        self.workout_plan_text.configure(yscrollcommand=scrollbar.set)
+        # Create a frame to hold the workout plan tables
+        self.workout_plan_frame = ttk.Frame(exercise_generation_tab)
+        self.workout_plan_frame.pack(padx=10, pady=10, fill='both', expand=True)
 
     # called when generate_workout_button is clicked
     # will store generated plan in self.plan and show it in the text box
@@ -154,17 +148,26 @@ class WorkoutTrackerApp(tk.Tk):
         for day in range(self.user_profile['days_per_week']):
             daily_workout = random.sample(self.exercise_db[self.user_profile['fitness_level']], 3)
             self.plan.append(daily_workout)
-            # print(plan)
 
-        # Display the workout plan in the text box with codes
-        self.workout_plan_text.delete(1.0, tk.END)  # Clear the text box
+        # Clear the previous workout plan
+        for widget in self.workout_plan_frame.winfo_children():
+            widget.destroy()
+
+        # Display the workout plan in tables
         for i, daily_workout in enumerate(self.plan, 1):
-            self.workout_plan_text.insert(tk.END, f"Day {i}:\n")
+            # Create a frame for each day's workout
+            day_frame = ttk.Frame(self.workout_plan_frame, relief=tk.RIDGE, borderwidth=2)
+            day_frame.pack(fill='x', pady=5)
+
+            # Day title
+            day_title = ttk.Label(day_frame, text=f"Day {i}", font=('Arial', 14, 'bold'), anchor='center')
+            day_title.pack(fill='x')
+
+            # Exercises list with codes
             for j, exercise in enumerate(daily_workout):
-                self.workout_plan_text.insert(tk.END, f"  {i}{chr(65+j)}: {exercise}\n")
-            self.workout_plan_text.insert(tk.END, "\n")
-        # scroll down to the end of the text
-        self.workout_plan_text.see(tk.END)
+                exercise_code = f"{i}{chr(65+j)}"
+                exercise_label = ttk.Label(day_frame, text=f"{exercise_code}: {exercise}", anchor='center')
+                exercise_label.pack(fill='x')
 
         # Populate the exercise codes listbox in the logging tab
         self.populate_exercise_codes_listbox()
@@ -273,4 +276,5 @@ class WorkoutTrackerApp(tk.Tk):
 if __name__ == "__main__":
     app = WorkoutTrackerApp()
     app.mainloop()
+
 
