@@ -171,19 +171,45 @@ class WorkoutTrackerApp(tk.Tk):
         self.entry_date = tk.Entry(workout_logging_tab)
         self.entry_date.grid(row=0, column=1)
 
-        tk.Label(workout_logging_tab, text="Exercises (comma-separated codes):").grid(row=1, column=0, sticky="w")
-        self.entry_exercise_codes = tk.Entry(workout_logging_tab)
-        self.entry_exercise_codes.grid(row=1, column=1)
+        tk.Label(workout_logging_tab, text="Exercises:").grid(row=1, column=0, sticky="w")
 
+        # Create a listbox for multiple selection
+        self.exercise_codes_listbox = tk.Listbox(workout_logging_tab, selectmode="multiple", height=10)
+        self.exercise_codes_listbox.grid(row=1, column=1, padx=10, pady=10)
+
+        # Add the exercise codes to the listbox
+        self.populate_exercise_codes_listbox()
+
+        # Create a button to confirm selections
+        self.select_exercises_button = tk.Button(workout_logging_tab, text="Select", command=self.confirm_exercises_selection)
+        self.select_exercises_button.grid(row=1, column=2, padx=10, pady=10)
+
+        # Display the selected exercises
+        self.selected_exercises_label = tk.Label(workout_logging_tab, text="Selected Exercises: None")
+        self.selected_exercises_label.grid(row=2, column=0, columnspan=3, sticky="w")
+
+        # Button to log workout
         self.log_workout_button = tk.Button(workout_logging_tab, text="Log Workout", command=self.log_workout)
-        self.log_workout_button.grid(row=2, column=0, columnspan=2)
+        self.log_workout_button.grid(row=3, column=0, columnspan=2)
+
+    def populate_exercise_codes_listbox(self):
+        # Populate the exercise codes listbox with generated workout plan codes
+        self.exercise_codes_listbox.delete(0, tk.END)
+        for i, daily_workout in enumerate(self.plan, 1):
+            for j, _ in enumerate(daily_workout):
+                self.exercise_codes_listbox.insert(tk.END, f"{i}{chr(65+j)}")
+
+    def confirm_exercises_selection(self):
+        selected_indices = self.exercise_codes_listbox.curselection()
+        selected_codes = [self.exercise_codes_listbox.get(i) for i in selected_indices]
+        self.selected_exercises_label.config(text=f"Selected Exercises: {', '.join(selected_codes)}")
 
     def log_workout(self):
         workout_date = self.entry_date.get()
-        exercise_codes = self.entry_exercise_codes.get().split(',')
+        selected_exercise_codes = self.selected_exercises_label.cget("text").replace("Selected Exercises: ", "").split(', ')
 
         exercises = []
-        for code in exercise_codes:
+        for code in selected_exercise_codes:
             day = int(code[0]) - 1
             exercise_index = ord(code[1]) - 65
             exercises.append(self.plan[day][exercise_index])
@@ -197,7 +223,7 @@ class WorkoutTrackerApp(tk.Tk):
 
         tk.messagebox.showinfo("Success", "Workout logged successfully!")
         self.entry_date.delete(0, tk.END)
-        self.entry_exercise_codes.delete(0, tk.END)
+        self.selected_exercises_label.config(text="Selected Exercises: None")
 
     def load_workout_logs(self):
         workout_logs = []
