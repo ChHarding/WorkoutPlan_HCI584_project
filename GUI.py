@@ -1,15 +1,11 @@
-# Major parts:
-# 1) user profile: Load user profile from a csv file, update it, save it
-# 2) Exercise generation: load exercises from a csv file, generate a workout plan based on user profile
-# 3) Workout logging: log workouts to a csv file
-# 4) Progress tracking: track/plot progress over time
-
 import tkinter as tk
-from tkinter import messagebox, ttk
 import random
 import csv
-from datetime import date
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+from datetime import date
+import tkinter.ttk as ttk
 
 class WorkoutTrackerApp(tk.Tk):
     def __init__(self):
@@ -41,6 +37,8 @@ class WorkoutTrackerApp(tk.Tk):
 
         self.workout_log_file = 'workout_log.csv'
         self.workout_logs = self.load_workout_logs()
+
+        self.plan = []
 
         # Initialize tabs
         self.init_tabs()
@@ -136,52 +134,88 @@ class WorkoutTrackerApp(tk.Tk):
     def create_exercise_generation_tab(self, exercise_generation_tab):
         # Create a button to generate a workout plan
         self.generate_workout_button = tk.Button(exercise_generation_tab, text="Generate Workout Plan", command=self.generate_workout_plan)
-        self.generate_workout_button.pack(padx=10)
+        self.generate_workout_button.pack(padx=10, pady=10)
 
-        # create scrollable text box to display the workout plan
-        self.workout_plan_text = tk.Text(exercise_generation_tab, height=15, width=50)
-        self.workout_plan_text.pack(padx=10, pady=10, fill='both', expand=True)
-
-        #creat vertical scrollbar for the text box
-        scrollbar = tk.Scrollbar(self.workout_plan_text, orient="vertical", command=self.workout_plan_text.yview)
-        scrollbar.pack(side="right", fill="y")
-        #configure the text bos to use the scrollbar
-        self.workout_plan_text.configure(yscrollcommand=scrollbar.set)
+        # Create a frame to hold the workout plan tables
+        self.workout_plan_frame = ttk.Frame(exercise_generation_tab)
+        self.workout_plan_frame.pack(padx=10, pady=10, fill='both', expand=True)
 
     # called when generate_workout_button is clicked
     # will store generated plan in self.plan and show it in the text box
     def generate_workout_plan(self):
         fitness_level = self.user_profile['fitness_level']
         self.plan = []
-        for _ in range(self.user_profile['days_per_week']):
+        for day in range(self.user_profile['days_per_week']):
             daily_workout = random.sample(self.exercise_db[self.user_profile['fitness_level']], 3)
             self.plan.append(daily_workout)
-            # print(plan)
 
-        #Display the workout plan in the text box
+        # Clear the previous workout plan
+        for widget in self.workout_plan_frame.winfo_children():
+            widget.destroy()
+
+        # Display the workout plan in tables
         for i, daily_workout in enumerate(self.plan, 1):
-            self.workout_plan_text.insert(tk.END, f"Day {i}:\n")
-            for exercise in daily_workout:
-                self.workout_plan_text.insert(tk.END, f"  - {exercise}\n")
-            self.workout_plan_text.insert(tk.END, "\n")
-        # scroll down to the end of the text
-        self.workout_plan_text.see(tk.END)
+            # Create a frame for each day's workout
+            day_frame = ttk.Frame(self.workout_plan_frame, relief=tk.RIDGE, borderwidth=2)
+            day_frame.pack(fill='x', pady=5)
+
+            # Day title
+            day_title = ttk.Label(day_frame, text=f"Day {i}", font=('Arial', 14, 'bold'), anchor='center')
+            day_title.pack(fill='x')
+
+            # Exercises list with codes
+            for j, exercise in enumerate(daily_workout):
+                exercise_code = f"{i}{chr(65+j)}"
+                exercise_label = ttk.Label(day_frame, text=f"{exercise_code}: {exercise}", anchor='center')
+                exercise_label.pack(fill='x')
+
+        # Populate the exercise codes listbox in the logging tab
+        self.populate_exercise_codes_listbox()
 
     def create_workout_logging_tab(self, workout_logging_tab):
         tk.Label(workout_logging_tab, text="Date (YYYY-MM-DD):").grid(row=0, column=0, sticky="w")
         self.entry_date = tk.Entry(workout_logging_tab)
         self.entry_date.grid(row=0, column=1)
 
-        tk.Label(workout_logging_tab, text="Exercises (comma-separated):").grid(row=1, column=0, sticky="w")
-        self.entry_exercises = tk.Entry(workout_logging_tab)
-        self.entry_exercises.grid(row=1, column=1)
+        tk.Label(workout_logging_tab, text="Exercises:").grid(row=1, column=0, sticky="w")
 
+        # Create a listbox for multiple selection
+        self.exercise_codes_listbox = tk.Listbox(workout_logging_tab, selectmode="multiple", height=10)
+        self.exercise_codes_listbox.grid(row=1, column=1, padx=10, pady=10)
+
+        # Create a button to confirm selections
+        self.select_exercises_button = tk.Button(workout_logging_tab, text="Select", command=self.confirm_exercises_selection)
+        self.select_exercises_button.grid(row=1, column=2, padx=10, pady=10)
+
+        # Display the selected exercises
+        self.selected_exercises_label = tk.Label(workout_logging_tab, text="Selected Exercises: None")
+        self.selected_exercises_label.grid(row=2, column=0, columnspan=3, sticky="w")
+
+        # Button to log workout
         self.log_workout_button = tk.Button(workout_logging_tab, text="Log Workout", command=self.log_workout)
-        self.log_workout_button.grid(row=2, column=0, columnspan=2)
+        self.log_workout_button.grid(row=3, column=0, columnspan=2)
+
+    def populate_exercise_codes_listbox(self):
+        # Populate the exercise codes listbox with generated workout plan codes
+        self.exercise_codes_listbox.delete(0, tk.END)
+        for i, daily_workout in enumerate(self.plan, 1):
+            for j, _ in enumerate(daily_workout):
+                self.exercise_codes_listbox.insert(tk.END, f"{i}{chr(65+j)}")
+
+    def confirm_exercises_selection(self):
+        selected_indices = self.exercise_codes_listbox.curselection()
+        selected_codes = [self.exercise_codes_listbox.get(i) for i in selected_indices]
+        self.selected_exercises_label.config(text=f"Selected Exercises: {', '.join(selected_codes)}")
 
     def log_workout(self):
         workout_date = self.entry_date.get()
-        exercises = self.entry_exercises.get().split(',')
+        selected_exercise_codes = self.selected_exercises_label.cget("text").replace("Selected Exercises: ", "").split(', ')
+
+        exercises = []
+        for code in selected_exercise_codes:
+            day = int(code[0]) - 1
+            exercise_index = ord(code[1]) - 65
+            exercises.append(self.plan[day][exercise_index])
 
         workout_entry = {'day': workout_date, 'exercises': exercises}
         self.workout_logs.append(workout_entry)
@@ -192,8 +226,8 @@ class WorkoutTrackerApp(tk.Tk):
 
         tk.messagebox.showinfo("Success", "Workout logged successfully!")
         self.entry_date.delete(0, tk.END)
-        self.entry_exercises.delete(0, tk.END)
-    
+        self.selected_exercises_label.config(text="Selected Exercises: None")
+
     def load_workout_logs(self):
         workout_logs = []
         try:
@@ -211,6 +245,10 @@ class WorkoutTrackerApp(tk.Tk):
         self.track_progress_button = tk.Button(progress_tracking_tab, text="Track Progress", command=self.track_progress)
         self.track_progress_button.pack(pady=10)
 
+        # Add a frame to hold the progress tracking plot
+        self.progress_plot_frame = ttk.Frame(progress_tracking_tab)
+        self.progress_plot_frame.pack(fill='both', expand=True)
+    
     def track_progress(self):
         if not self.workout_logs:
             tk.messagebox.showerror("Error", "No workout logs found to track progress.")
@@ -219,15 +257,24 @@ class WorkoutTrackerApp(tk.Tk):
         days = [log['day'] for log in self.workout_logs]
         completed_exercises = [len(log['exercises']) for log in self.workout_logs]
 
-        plt.plot(days, completed_exercises, marker='o')
-        plt.xlabel('Day') #label
-        plt.ylabel('Completed Exercises') #label
-        plt.title('Workout Progress') #title of the table
-        plt.xticks(rotation=-90) #rotates the x-axis labels
-        plt.show()
+        fig = plt.Figure(figsize=(6, 4), dpi=100)
+        ax = fig.add_subplot(111)
+        ax.plot(days, completed_exercises, marker='o')
+        ax.set_xlabel('Day')
+        ax.set_ylabel('Completed Exercises')
+        ax.set_title('Workout Progress')
+        ax.tick_params(axis='x', rotation=-90)
 
+        canvas = FigureCanvasTkAgg(fig, master=self.progress_plot_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        toolbar = NavigationToolbar2Tk(canvas, self.progress_plot_frame)
+        toolbar.update()
+        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 if __name__ == "__main__":
     app = WorkoutTrackerApp()
     app.mainloop()
+
 
