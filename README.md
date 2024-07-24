@@ -58,9 +58,9 @@ Screenshots:
 1: User Profile Tab
 ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.32.46%E2%80%AFAM.png?version%3D1721839037536)
 ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.33.18%E2%80%AFAM.png?version%3D1721839066219)
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.33.45%E2%80%AFAM.png?version%3D1721839077032)nerate Workout Plan Tab
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.33.45%E2%80%AFAM.png?version%3D1721839077032)
 ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.34.11%E2%80%AFAM.png?version%3D1721839084454)
-2: Exercise  Generation
+2: Generation Exercise Tab
 ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.34.35%E2%80%AFAM.png?version%3D1721839096489)
 3: Workout Logging Tab
 ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.35.02%E2%80%AFAM.png?version%3D1721839107080)
