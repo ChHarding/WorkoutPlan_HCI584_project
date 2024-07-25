@@ -6,6 +6,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 from datetime import date
 import tkinter.ttk as ttk
+import re
 
 class WorkoutTrackerApp(tk.Tk):
     def __init__(self):
@@ -181,9 +182,9 @@ class WorkoutTrackerApp(tk.Tk):
 
         # Create a listbox for multiple selection
         self.exercise_codes_listbox = tk.Listbox(workout_logging_tab, selectmode="multiple", height=10)
-        self.exercise_codes_listbox.grid(row=1, column=1, padx=10, pady=10)
+        self.exercise_codes_listbox.grid(row=1, column=1)
 
-        # Create a button to confirm selections
+        # Add a "Select" button for the listbox
         self.select_exercises_button = tk.Button(workout_logging_tab, text="Select", command=self.confirm_exercises_selection)
         self.select_exercises_button.grid(row=1, column=2, padx=10, pady=10)
 
@@ -196,25 +197,40 @@ class WorkoutTrackerApp(tk.Tk):
         self.log_workout_button.grid(row=3, column=0, columnspan=2)
 
     def populate_exercise_codes_listbox(self):
-        # Populate the exercise codes listbox with generated workout plan codes
+        # Populate the exercise codes listbox with generated workout plan codes and exercises
         self.exercise_codes_listbox.delete(0, tk.END)
         for i, daily_workout in enumerate(self.plan, 1):
-            for j, _ in enumerate(daily_workout):
-                self.exercise_codes_listbox.insert(tk.END, f"{i}{chr(65+j)}")
+            for j, exercise in enumerate(daily_workout):
+                self.exercise_codes_listbox.insert(tk.END, f"{i}{chr(65+j)}: {exercise}")
 
     def confirm_exercises_selection(self):
         selected_indices = self.exercise_codes_listbox.curselection()
-        selected_codes = [self.exercise_codes_listbox.get(i) for i in selected_indices]
-        self.selected_exercises_label.config(text=f"Selected Exercises: {', '.join(selected_codes)}")
+        selected_codes = [self.exercise_codes_listbox.get(i).split(': ')[0] for i in selected_indices]
+        selected_exercises = [self.exercise_codes_listbox.get(i) for i in selected_indices]
+        self.selected_exercises_label.config(text=f"Selected Exercises: {', '.join(selected_exercises)}")
 
     def log_workout(self):
         workout_date = self.entry_date.get()
+
+        # Check if the date is in the correct format
+        if not re.match(r"\d{4}-\d{2}-\d{2}", workout_date):
+            tk.messagebox.showerror("Error", "Date must be in YYYY-MM-DD format")
+            return
+        
+        if not workout_date:
+            tk.messagebox.showerror("Error", "Please enter a date")
+            return
+        
         selected_exercise_codes = self.selected_exercises_label.cget("text").replace("Selected Exercises: ", "").split(', ')
+        
+        if "None" in selected_exercise_codes:
+            tk.messagebox.showerror("Error", "Please select exercises")
+            return
 
         exercises = []
         for code in selected_exercise_codes:
-            day = int(code[0]) - 1
-            exercise_index = ord(code[1]) - 65
+            day = int(code.split(':')[0][0]) - 1
+            exercise_index = ord(code.split(':')[0][1]) - 65
             exercises.append(self.plan[day][exercise_index])
 
         workout_entry = {'day': workout_date, 'exercises': exercises}
@@ -258,6 +274,7 @@ class WorkoutTrackerApp(tk.Tk):
         completed_exercises = [len(log['exercises']) for log in self.workout_logs]
 
         fig = plt.Figure(figsize=(6, 4), dpi=100)
+        fig.subplots_adjust(bottom=0.25)  # Add this line to adjust the bottom margin
         ax = fig.add_subplot(111)
         ax.plot(days, completed_exercises, marker='o')
         ax.set_xlabel('Day')
