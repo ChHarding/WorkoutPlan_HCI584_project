@@ -85,21 +85,20 @@ __Progress Tracking Tab:__
 __Screenshots:__
 
 1: User Profile Tab:
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.32.46%E2%80%AFAM.png?version%3D1721839037536)
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.33.18%E2%80%AFAM.png?version%3D1721839066219)
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.33.45%E2%80%AFAM.png?version%3D1721839077032)
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.34.11%E2%80%AFAM.png?version%3D1721839084454)
+![alt text](<Screenshot 2024-07-24 at 11.32.46 AM.png>)
+![alt text](<Screenshot 2024-07-24 at 11.33.18 AM.png>)
+![alt text](<Screenshot 2024-07-24 at 11.33.45 AM.png>)
+![alt text](<Screenshot 2024-07-24 at 11.34.11 AM.png>)
 
 2: Generation Exercise Tab:
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.34.35%E2%80%AFAM.png?version%3D1721839096489)
+![alt text](<Screenshot 2024-07-24 at 11.34.35 AM.png>)
 
 3: Workout Logging Tab:
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.35.02%E2%80%AFAM.png?version%3D1721839107080)
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.35.24%E2%80%AFAM.png?version%3D1721839175580)
+![alt text](<Screenshot 2024-07-24 at 11.35.02 AM.png>)
+![alt text](<Screenshot 2024-07-24 at 11.35.24 AM.png>)
 
 4: Progress Tracking Tab:
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/abigailmiller/Documents/Screenshot%202024-07-24%20at%2011.35.48%E2%80%AFAM.png?version%3D1721839186542)
-
+![alt text](<Screenshot 2024-07-24 at 11.35.48 AM.png>)
 
 
 __Troubleshooting:__
