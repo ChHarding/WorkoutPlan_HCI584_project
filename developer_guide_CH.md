@@ -18,7 +18,6 @@ WorkoutPlan/
 │   ├── developer_guide.md
 ```
 
-- CH: no need for how to install here ...
 
 ## Modules Overview
 
@@ -37,7 +36,7 @@ Handles the tracking and plotting of workout progress. Contains the `ProgressTra
 ## User Interaction and Flow
 
 0. **User Profile Tab**
-   - CH: state what it does
+   - Allows users to input their personal goal, fitness level, available equipment, days they can/want to workout per week, and the time commitment they have for each workout. It can be changed by the users at any point.
      
    ![image](https://github.com/user-attachments/assets/1697213c-324d-4477-9aab-cb11d5d10a53)
 
