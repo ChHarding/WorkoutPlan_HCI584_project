@@ -13,9 +13,7 @@ __Prerequisites:__
 
 Before you begin, ensure you have the following installed on your system:
 - Python 3.x
-- Tkinter (usually comes with Python)
 - Matplotlib
-- CSV module (comes with Python)
 
 
 
