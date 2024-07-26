@@ -52,7 +52,7 @@ Handles the tracking and plotting of workout progress. Contains the `ProgressTra
      
     ![image](https://github.com/user-attachments/assets/309b38d6-9042-4a4f-8723-4277b598585b)
 
-    - talk about the format of the `workout_log.csv` log file!
+    - The `workout_log.csv` log file is formatted to store the information inputed by users through the Workout Logging Tab. The file will compile and keep every logged workout.
    ```
     2024-07-18,Jumping Jacks,Squats,Knee Push-ups
     2024/07/19,Jumping Jacks,Knee Push-ups,Squats
