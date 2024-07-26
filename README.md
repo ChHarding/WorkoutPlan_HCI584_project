@@ -1,10 +1,12 @@
 # WorkoutPlan_HCI584_project
-Workout Plan Application
+__Workout Plan Application__
+
 
 
 __Introduction:__
 
 Welcome to the WorkoutPlan Application! This application allows users to generate workout plans, log their workouts, and track their progress over time. Follow the steps below to get started.
+
 
 
 __Prerequisites:__
@@ -14,6 +16,7 @@ Before you begin, ensure you have the following installed on your system:
 - Tkinter (usually comes with Python)
 - Matplotlib
 - CSV module (comes with Python)
+
 
 
 __Installation:__
@@ -27,6 +30,7 @@ Ensure you have matplotlib installed:
 pip install matplotlib
 
 
+
 __Setup:__
 
 1: Download or Clone the Repository:
@@ -37,11 +41,13 @@ cd workoutplan
 No additional setup is required beyond installing the dependencies.
 
 
+
 __Usage:__
 
 Run the main application file:
 python GUI.py
 This will open the WorkoutPlan application window.
+
 
 
 __User Profile Tab:__
@@ -59,11 +65,13 @@ __User Profile Tab:__
 6: Update Profile: Click the "Update Profile" button to save your settings.
 
 
+
 __Generate Workout Plan Tab:__
 
 1: Generate Workout Plan: Click the button to generate a workout plan based on your profile.
 
 2: The generated workout plan will be displayed in a scrollable text box, organized by days (e.g., Day 1, Day 2).
+
 
 
 __Workout Logging Tab:__
@@ -75,11 +83,13 @@ __Workout Logging Tab:__
 3: Log Workout: Click the "Log Workout" button to save your workout. A confirmation message will be displayed.
 
 
+
 __Progress Tracking Tab:__
 
 1: Track Progress: Click the "Track Progress" button to view a graph of your workout progress over time.
 
 2: The graph will display the number of completed exercises for each logged workout day.
+
 
 
 __Screenshots:__
@@ -101,6 +111,7 @@ __Screenshots:__
 ![alt text](<Screenshot 2024-07-24 at 11.35.48 AM.png>)
 
 
+
 __Troubleshooting:__
 
 1: Logging Errors:
@@ -112,6 +123,7 @@ __Troubleshooting:__
 - fig.subplots_adjust(bottom=0.25)
 
 
+
 __Limitations:__
 
 1: The application currently does not support custom exercises beyond the predefined list.
@@ -119,6 +131,7 @@ __Limitations:__
 2: The workout plan generation does not consider the user's specific goals in depth.
 
 3: Error handling is basic and could be improved for a better user experience.
+
 
 
 __Conclusion:__
