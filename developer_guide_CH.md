@@ -61,7 +61,7 @@ Handles the tracking and plotting of workout progress. Contains the `ProgressTra
    ```
 
 4. **Progress Tracking Tab**
-   - Allows users to track their progress over time. Progress is defined by looking at your prior logged workouts on the chart.
+   - Allows users to track their progress over time. Progress is defined by looking at your prior logged workouts on the chart. Sudden negative slopes may indicate a drop off in working out.
      
    ![image](https://github.com/user-attachments/assets/a4c87b9d-bb59-46ef-bac9-71ec311808de)
 
