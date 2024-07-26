@@ -31,9 +31,9 @@ class WorkoutTrackerApp(tk.Tk):
         }
 
         self.exercise_db = {
-            'beginner': ['Jumping Jacks', 'Knee Push-ups', 'Squats'],
-            'intermediate': ['Burpees', 'Pull-ups', 'Lunges'],
-            'advanced': ['Weighted Push-ups', 'Muscle-ups', 'Pistol Squats']
+            'beginner': ['Jumping Jacks', 'Knee Push-ups', 'Body Weight Squats', 'Crunches', 'Lunges'],
+            'intermediate': ['Burpees', 'Pull-ups', 'Weighted Lunges', 'Shoulder Press', 'Goblet Squats'],
+            'advanced': ['Weighted Push-ups', 'Muscle-ups', 'Pistol Squats', 'Front Squats','Toes to Bar']
         }
 
         self.workout_log_file = 'workout_log.csv'
